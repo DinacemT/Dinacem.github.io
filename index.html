@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DINACEM - Paquetería Multiservicios Temascalapa</title>
+    <meta name="description" content="DINACEM: Tu paquetería multiservicios en Temascalapa. Envíos nacionales e internacionales con DHL, FedEx y Estafeta. Rapidez y confianza.">
+<meta name="keywords" content="DINACEM, Paquetería Temascalapa, Envíos DHL Temascalapa, FedEx Temascalapa, Estafeta Temascalapa, Mensajería">
+<meta name="author" content="DINACEM">
+<link rel="canonical" href="https://TU_USUARIO.github.io/NOMBRE_DE_TU_REPO/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --cloud-color: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Estilos de la Animación del Cielo */
+        .sky-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e40af 0%, #3b82f6 100%);
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .airplane-container {
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            transform: translateY(-50%);
+            animation: flight-path 8s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .airplane-svg {
+            width: 100px;
+            fill: white;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            animation: tilt 4s ease-in-out infinite;
+        }
+
+        @keyframes tilt {
+            0%, 100% { transform: rotate(5deg); }
+            50% { transform: rotate(-5deg); }
+        }
+
+        @keyframes flight-path {
+            0%, 100% { transform: translateY(-40%) translateX(0); }
+            50% { transform: translateY(-60%) translateX(30px); }
+        }
+
+        .cloud {
+            position: absolute;
+            background: var(--cloud-color);
+            border-radius: 100px;
+            animation: move-clouds linear infinite;
+        }
+
+        @keyframes move-clouds {
+            from { right: -300px; }
+            to { right: 110%; }
+        }
+
+        .trail {
+            position: absolute;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            animation: stream-past 2s linear infinite;
+        }
+
+        @keyframes stream-past {
+            from { transform: translateX(100vw); opacity: 0; }
+            50% { opacity: 0.5; }
+            to { transform: translateX(-100px); opacity: 0; }
+        }
+
+        /* Parallax Optimization */
+        .parallax-section {
+            min-height: 50vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .parallax-section {
+                background-attachment: scroll;
+                min-height: 40vh;
+            }
+        }
+
+        .hero-parallax {
+            height: 100vh;
+            background: transparent; /* El fondo lo da el .sky-bg */
+        }
+
+        .services-parallax {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('paqueteria.avif');
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        #mobile-menu.active {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navegación Responsiva -->
+    <nav class="fixed w-full z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 md:h-20 items-center">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl md:text-3xl font-bold text-blue-700 tracking-tighter italic">DINACEM</h1>
+                </div>
+                
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#inicio" class="text-gray-700 hover:text-blue-600 font-medium transition">Inicio</a>
+                    <a href="#servicios" class="text-gray-700 hover:text-blue-600 font-medium transition">Servicios</a>
+                    <a href="#aliados" class="text-gray-700 hover:text-blue-600 font-medium transition">Aliados</a>
+                    <a href="#ubicacion" class="text-gray-700 hover:text-blue-600 font-medium transition">Ubicación</a>
+                    <a href="#Equipo" class="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition font-bold text-sm">Equipo</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="menu-toggle" class="text-gray-700 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 px-4">
+            <div class="flex flex-col space-y-4 py-6">
+                <a href="#inicio" class="mobile-link text-gray-700 font-medium">Inicio</a>
+                <a href="#servicios" class="mobile-link text-gray-700 font-medium">Servicios</a>
+                <a href="#aliados" class="mobile-link text-gray-700 font-medium">Aliados</a>
+                <a href="#ubicacion" class="mobile-link text-gray-700 font-medium">Ubicación</a>
+                <a href="#Equipo" class="mobile-link bg-blue-600 text-white px-4 py-2 rounded-lg text-center font-bold">Equipo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section con Animación -->
+    <section id="inicio" class="parallax-section hero-parallax">
+        <div class="sky-bg" id="sky-container">
+            <!-- Capa de animación del avión -->
+            <div class="airplane-container">
+                <svg class="airplane-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.91,6.5L22.5,12L1.91,17.5L5,12L1.91,6.5M5.5,12L2,7.19L19.5,11.85L5.5,12M2,16.81L5.5,12L19.5,12.15L2,16.81Z"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="text-center text-white px-6 w-full max-w-4xl relative z-10">
+            <h2 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 drop-shadow-lg leading-tight">DINACEM Temascalapa</h2>
+            <p class="text-lg md:text-2xl mb-8 font-light opacity-90 drop-shadow-md">Tus envíos con DHL, FedEx y Estafeta en un solo lugar. Seguro, rápido y cerca de ti.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#servicios" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold transition flex items-center justify-center shadow-lg">
+                    Nuestros Servicios <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#ubicacion" class="bg-white/20 backdrop-blur-md border border-white/50 text-white px-8 py-4 rounded-lg font-bold hover:bg-white/30 transition shadow-lg">
+                    Ver Ubicación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quienes Somos -->
+    <div class="py-2 mt-10 max-w-7xl mx-auto px-6 text-center">
+        <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">¿Quiénes somos?</h3>
+        <p class="text-gray-600 mb-12 max-w-3xl mx-auto text-lg">Somos una paquetería de multiservicios de Temascalapa, quienes trabajamos para conectar a las personas y empresas con sus destinos, ofreciendo soluciones logísticas confiables, rápidas y personalizadas. Brindamos atención cercana desde la cotización hasta la entrega final, asegurando que cada envío llegue con seguridad, cuidado y confianza, sin importar la distancia.</p>
+    </div>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-2 md:py-2 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Lo que ofrecemos</h3>
+            <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Soluciones de paquetería multiservicios para que no tengas que ir más lejos.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                <div class="p-8 bg-blue-50/50 rounded-3xl border border-blue-100 hover:shadow-xl transition-all group">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:rotate-6 transition">
+                        <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-blue-900">Envíos Nacionales</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Conectamos Temascalapa con todo México. Elige la paquetería que prefieras según tu presupuesto.</p>
+                    <ul class="text-left text-blue-800 text-sm space-y-1 inline-block">
+                        <li><i class="fas fa-check-circle mr-2"></i><strong>DHL</strong></li>
+                        <li><i class="fas fa-check-circle mr-2"></i><strong>Fedex</strong></li>
+                        <li><i class="fas fa-check-circle mr-2"></i><strong>Estafeta</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="p-8 bg-blue-50/50 rounded-3xl border border-blue-100 hover:shadow-xl transition-all group">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:rotate-6 transition">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-blue-900">Envíos Internacionales</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Manda tus paquetes al extranjero con la infraestructura global de DHL. Te asesoramos en todo el proceso.</p>
+                    <ul class="text-left text-blue-800 text-sm space-y-1 inline-block">
+                        <li><i class="fas fa-globe mr-2"></i><strong>DHL Express</strong></li>
+                    </ul>
+                </div>
+
+                <div class="p-8 bg-blue-50/50 rounded-3xl border border-blue-100 hover:shadow-xl transition-all group sm:col-span-2 lg:col-span-1">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:rotate-6 transition">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-blue-900">Retornos E-commerce</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">¿Compraste en Shein o Mercado Libre y quieres devolver? Procesamos tus retornos sin complicaciones.</p>
+                    <ul class="text-left text-blue-800 text-sm space-y-1 inline-block">
+                        <li><i class="fas fa-box mr-2"></i><strong>Mercado Libre</strong></li>
+                        <li><i class="fas fa-box mr-2"></i><strong>Shein / Temu</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-24 grid md:grid-cols-2 gap-12 text-left bg-gray-50 p-8 md:p-12 rounded-3xl">
+                <div>
+                    <h4 class="text-2xl font-bold mb-4 text-blue-900">Misión</h4>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">Nuestra misión es ofrecer soluciones de mensajería nacional e internacional confiables, seguras y puntuales, conectando personas y empresas con eficiencia y calidez humana. Impulsamos nuestra operación con tecnología de vanguardia para garantizar transparencia y confianza.</p>
+                </div>
+                <div>
+                    <h4 class="text-2xl font-bold mb-4 text-blue-900">Visión</h4>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">Ser la red de logística más confiable del norte del Estado de México, reconocida por nuestra atención humana e innovación, consolidándonos como el punto donde las mejores empresas se encuentran en un solo lugar.</p>
+                </div>
+            </div>
+<br><br><br>
+<h4 class="text-xl font-bold mb-3 text-blue-900" align="center">Valores</h4>
+         <div align="left" class="text-gray-600 leading-relaxed text-sm md:text-base" align="left">
+			<ul type="circle"> 
+<ul style="list-style-type: circle;" class="ml-5 space-y-2" margin:10px> 
+            <li><strong>Confianza:</strong> Cumplimos con cada entrega como si fuera nuestra.</li> 
+            <li><strong>Eficiencia:</strong> Optimizamos cada proceso para que tu envío llegue rápido y seguro.</li>
+            <li><strong>Empatía:</strong> Escuchamos y comprendemos las necesidades de cada cliente.</li> 
+            <li><strong>Transparencia:</strong> Ofrecemos información clara, precios justos y seguimiento constante.</li>
+            <li><strong>Trabajo en equipo:</strong> Colaboramos con las principales empresas de logística para ofrecerte la mejor opción.</li>
+            <li><strong>Innovación:</strong> Mejoramos continuamente para ofrecer servicios más cómodos y conectados.</li>
+            <li><strong>Responsabilidad:</strong> Cuidamos cada paquete como un puente entre personas.</li>
+</ul> </div>
+
+        </div>
+
+   
+<!-- Estilos CSS para las animaciones -->
+<style>
+    /* Contenedor general de la regla */
+    .animated-hr {
+        position: relative;
+        height: 2px;
+        background: #e5e7eb;
+        border: none;
+        margin: 4rem 0;
+        overflow: visible;
+        width: 100%;
+    }
+
+    /* Efecto de brillo que recorre la línea de fondo */
+    .animated-hr::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+        animation: line-glow 3s linear infinite;
+    }
+
+    /* Estilos base para el icono móvil */
+    .hr-icon {
+        position: absolute;
+        top: -15px;
+        left: -50px;
+        width: 32px;
+        height: 32px;
+        background: white;
+        color: #1e40af;
+        border: 2px solid #3b82f6;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    /* Variante: Avión (estilo circular y rotado) */
+    .hr-icon.airplane {
+        border-radius: 50%;
+        transform: rotate(-10deg);
+        animation: airplane-move 5s linear infinite;
+    }
+
+    /* Variante: Caja (estilo cuadrado) */
+    .hr-icon.box {
+        animation: box-move 7s linear infinite;
+    }
+
+    /* Animación para el avión (un poco más rápida) */
+    @keyframes airplane-move {
+        0% { left: -5%; opacity: 0; transform: translateY(0) rotate(-10deg); }
+        10% { opacity: 1; }
+        50% { transform: translateY(-3px) rotate(-5deg); }
+        90% { opacity: 1; }
+        100% { left: 105%; opacity: 0; transform: translateY(0) rotate(-10deg); }
+    }
+
+    /* Animación para la caja (movimiento constante) */
+    @keyframes box-move {
+        0% { left: -5%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { left: 105%; opacity: 0; }
+    }
+
+    /* Animación del brillo de la línea */
+    @keyframes line-glow {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+</style>
+
+<!-- Ejemplo 1: Opción con AVION -->
+<div class="animated-hr">
+    <div class="hr-icon airplane">
+        <i class="fas fa-plane"></i>
+    </div>
+</div>
+
+<div style="margin-top: 40px;"></div>
+
+<!-- Ejemplo 2: Opción con CAJA -->
+<div class="animated-hr">
+    <div class="hr-icon box">
+        <i class="fas fa-box"></i>
+    </div>
+</div>
+
+<!-- Asegúrate de incluir FontAwesome en tu proyecto para ver los iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        </div>
+    </section>
+<!-- Aliados -->
+    <section id="aliados" class="pt-1 pb-1 bg-gray-5">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-10">
+            Trabajamos con las mejores empresas de logística.
+        </h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center">
+                <div class="partner-logo"><img src="fedex logo.jpg"  style="margin:20px;" align="center" width="100" height="50">
+ </div>
+
+                <div class="partner-logo"><img src="dhl.png"  style="margin:20px;" align="center" width="100" height="50">
+</div> 
+
+                <div class="partner-logo"><img src="estafeta logo.png"   style="margin:20px;" align="center" width="100" height="50"></div> 
+
+                <div class="partner-logo"><img src="logo ml.jpg"  style="margin:20px;" align="center" width="100" height="50"></div>
+
+                <div class="partner-logo"><img src="sh.jpg"  style="margin:20px;" align="center" width="65" height="65"></div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Parallax Intermedio -->
+    <section class="parallax-section services-parallax">
+        <div class="text-center text-white px-6">
+            <h3 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-md">Tu paquete en buenas manos</h3>
+            <p class="text-lg md:text-xl font-light italic">“Las mejores empresas de logística en un solo lugar.”</p>
+        </div>
+    </section>
+
+    <!-- Ubicación -->
+    <section id="ubicacion" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="lg:w-1/2 w-full">
+                    <span class="text-blue-600 font-bold tracking-widest uppercase text-sm">Ubicación Estratégica</span>
+                    <h3 class="text-4xl font-bold text-gray-900 mt-2 mb-6 leading-tight">Ven a visitarnos en Temascalapa</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="mt-1 w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-map-location-dot"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h5 class="font-bold text-gray-900">Dirección</h5>
+                                <p class="text-gray-600">Av. Doctor Gustavo Baz 18, Barrio de la Cruz, Temascalapa, Estado de México, CP 55980.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="mt-1 w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h5 class="font-bold text-gray-900">Horario de Atención</h5>
+                                <p class="text-gray-600">Lunes a Viernes: 9:30 AM - 5:30 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/dir//Paqueter%C3%ADa+DINACEM+(DHL,+FedEx+y+Estafeta)+Temascalapa" target="_blank" class="mt-10 inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition font-bold shadow-lg">
+                        Abrir en Google Maps <i class="fas fa-external-link-alt ml-3"></i>
+                    </a>
+                </div>
+                <div class="lg:w-1/2 w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl border-8 border-gray-100">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.58249852234!2d-98.91492162391054!3d19.829924127715053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d197e85beecf7b%3A0x69f2dac10aa5eb94!2sPaqueter%C3%ADa%20DINACEM%20(DHL%2C%20FedEx%20y%20Estafeta)%20Temascalapa!5e0!3m2!1ses-419!2smx!4v1707000000000!5m2!1ses-419!2smx" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equipo -->
+    <section id="Equipo" class="py-16 bg-blue-900">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-blue-100 mb-6 text-lg">Nuestro equipo de DINACEM está listo para ayudarte.</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-10">Organigrama</h3>
+            <div class="bg-white/10 p-4 rounded-3xl">
+                <img src="organigramabien.jpg" alt="Organigrama" class="w-full h-auto rounded-2xl mx-auto shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 text-center px-6">
+        <h2 class="text-3xl font-bold text-white mb-4 italic tracking-tighter">DINACEM</h2>
+        <p class="text-gray-400 mb-8 max-w-sm mx-auto">Multiservicios de paquetería líderes en la región de Temascalapa.</p>
+        <div class="flex justify-center space-x-8 mb-10">
+            <a href="#" class="text-gray-400 hover:text-white transition text-2xl"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/525538294510" class="text-gray-400 hover:text-white transition text-2xl"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="text-gray-600 text-xs tracking-widest uppercase">© 2026 DINACEM Paquetería. Diseñado para servirte.</p>
+    </footer>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/525538294510" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:bg-green-600 transition-all z-50 hover:scale-110">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        const skyContainer = document.getElementById('sky-container');
+
+        // Generar Nubes
+        function createCloud() {
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud';
+            const width = Math.random() * 120 + 80;
+            const height = width * 0.4;
+            cloud.style.width = `${width}px`;
+            cloud.style.height = `${height}px`;
+            cloud.style.top = `${Math.random() * 90}%`;
+            cloud.style.animationDuration = `${Math.random() * 20 + 15}s`;
+            cloud.style.animationDelay = `-${Math.random() * 15}s`;
+            cloud.style.zIndex = Math.random() > 0.5 ? 1 : 3;
+            skyContainer.appendChild(cloud);
+        }
+
+        // Generar Estelas de Viento
+        function createTrail() {
+            const trail = document.createElement('div');
+            trail.className = 'trail';
+            trail.style.width = `${Math.random() * 150 + 50}px`;
+            trail.style.top = `${Math.random() * 100}%`;
+            trail.style.animationDuration = `${Math.random() * 1 + 1}s`;
+            skyContainer.appendChild(trail);
+            setTimeout(() => trail.remove(), 2000);
+        }
+
+        // Inicializar
+        for(let i = 0; i < 10; i++) createCloud();
+        setInterval(createTrail, 300);
+
+        // Menú Móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+
+        // Animaciones al Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
